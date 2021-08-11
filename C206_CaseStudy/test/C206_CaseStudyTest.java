@@ -10,18 +10,23 @@ public class C206_CaseStudyTest {
 	private PurchaseOrder po1;
 	private PurchaseOrder po2;
 	private PurchaseOrder po3;
-	private PurchaseOrder po4;
-	private PurchaseOrder po5;
 	private ArrayList<PurchaseOrder> poList;
+	
+	private FoodItem fi1;
+	private FoodItem fi2;
+
+	private ArrayList<FoodItem> foodItemList;
 	
 	@Before
 	public void setUp() throws Exception {
 		po1 = new PurchaseOrder (1,5,"Fruit Stall");
 		po2 = new PurchaseOrder (2,8,"Drink Stall");
 		po3 = new PurchaseOrder (3,4,"Mix Veg Stall");
-		po4 = new PurchaseOrder (4,7,"Chicken Rice Stall");
-		po5 = new PurchaseOrder (5,2,"Western Stall");
 		poList= new ArrayList<PurchaseOrder>();
+		
+		fi1 = new FoodItem("Nasi Ayam", 3);
+		fi2 = new FoodItem("Steak", 15);
+		foodItemList = new ArrayList<FoodItem>();
 	}
 
 	@Test
@@ -73,14 +78,70 @@ public class C206_CaseStudyTest {
 		poList.remove(po2);
 	}
 	
+	@Test
+	public void addFoodItem() {
+		// Item list is not null, so that can add a new item - boundary
+		assertNotNull("Check if there is valid FoodItem arraylist to add to", foodItemList);
+
+		// Given an empty list, after adding 1 item, the size of the list is 1 - normal
+		// The item just added is as same as the first item of the list
+		C206_CaseStudy.addFoodItem(foodItemList, fi1);
+		assertEquals("Check that FoodItem arraylist size is 1", 1, foodItemList.size());
+		assertSame("Check that FoodItem is added", fi1, foodItemList.get(0));
+
+		// Add another item. test The size of the list is 2? -normal
+		// The item just added is as same as the second item of the list
+		C206_CaseStudy.addFoodItem(foodItemList, fi2);
+		assertEquals("Check that FoodItem arraylist size is 2", 2, foodItemList.size());
+		assertSame("Check that FoodItem is added", fi2, foodItemList.get(1));
+	}
+	
+	@Test
+	public void retrieveAllFoodItemTest() {
+		// Test if Item list is not null but empty -boundary
+		assertNotNull("Test if there is valid FoodItem arraylist to retrieve item", foodItemList);
+
+		// test if the list of food item retrieved from the SourceCentre is empty -
+		// boundary
+		String allFoodItem = C206_CaseStudy.retrieveAllFI(foodItemList);
+		String testOutput = "";
+		assertEquals("Check that ViewAllFI", testOutput, allFoodItem);
+
+		// Given an empty list, after adding 2 items, test if the size of the list is 2
+		// - normal
+		C206_CaseStudy.addFoodItem(foodItemList, fi1);
+		C206_CaseStudy.addFoodItem(foodItemList, fi2);
+		assertEquals("Test that FoodItem arraylist size is 2", 2, foodItemList.size());
+
+		// test if the expected output string same as the list of food item retrieved
+		// from the SourceCentre
+		allFoodItem = C206_CaseStudy.retrieveAllFI(foodItemList);
+		testOutput = String.format("%-20s %10d\n", "Nasi Ayam", 3);
+		testOutput += String.format("%-20s %10d\n", "Steak", 15);
+
+		assertEquals("Test that ViewAllFI", testOutput, allFoodItem);
+
+	}
+	@Test
+	public void deleteFoodItemTest() {
+		// Test if Item list is not null but empty -boundary
+		assertNotNull("Test if there is valid FoodItem arraylist to retrieve item", foodItemList);
+
+		// test if the list of food item retrieved from the SourceCentre is empty -
+		// boundary
+		String allFoodItem = C206_CaseStudy.retrieveAllFI(foodItemList);
+	}
+	
 	
 	@After
 	public void tearDown() throws Exception {
 		po1 = null;
 		po2 = null;
 		po3 = null;
-		po4 = null;
-		po5 = null;
 		poList = null;
+		
+		fi1 = null;
+		fi2 = null;
+		foodItemList = null;
 	}
 }

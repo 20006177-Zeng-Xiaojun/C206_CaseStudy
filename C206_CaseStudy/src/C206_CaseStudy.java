@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 	
-	private static final int OPTION_QUIT = 4;
+	private static final int OPTION_QUIT = 8 ;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -15,6 +15,11 @@ public class C206_CaseStudy {
 		poList.add(new PurchaseOrder (4,7,"Chicken Rice Stall"));
 		poList.add(new PurchaseOrder (5,2,"Western Stall"));
 		
+		
+		ArrayList<FoodItem> foodItemList = new ArrayList<FoodItem>();
+		foodItemList.add(new FoodItem("Nasi Ayam", 3));
+		foodItemList.add(new FoodItem("Steak", 15));
+		
 		int option = 0;
 
 		while (option != OPTION_QUIT) {
@@ -22,17 +27,27 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
+				FoodItem fi = inputFoodItem();
+				addFoodItem(foodItemList,fi);
+			} else if (option == 2) {
+				retrieveAllFI(foodItemList);
+				viewAllFI(foodItemList);
+			} else if (option == 3) {
+				deleteFI(foodItemList);
+			} else if (option == 4) {
+				System.out.println("Bye!");
+			} else if (option == 5) {
 				PurchaseOrder cc = inputPO();
 				C206_CaseStudy.addPurchaseOrder(poList, cc);
 			}
-			else if (option == 2) {
+			else if (option == 6) {
 				C206_CaseStudy.retrieveAllPO(poList);
 				C206_CaseStudy.viewAllPO(poList);
 			}
-			else if (option == 3) {
+			else if (option == 7) {
 				C206_CaseStudy.deletePO(poList);
 			}
-			else if (option == 4) {
+			else if (option == 8) {
 				System.out.println("Bye!");
 			} else {
 				System.out.println("Invalid option");
@@ -107,5 +122,57 @@ public class C206_CaseStudy {
 			}System.out.println("\nPurchase Order #"+id+ "has been successfully deleted!\n");
 		}
 		
+	}
+	public static FoodItem inputFoodItem() {
+		String fiName = Helper.readString("Enter food item name > ");
+		int fiPrice = Helper.readInt("Enter food item price > $");
+
+		FoodItem fi= new FoodItem(fiName, fiPrice);
+		return fi;
+		
+	}
+	
+	public static void addFoodItem(ArrayList<FoodItem> foodItemList, FoodItem fi) {
+		foodItemList.add(fi);
+
+		System.out.println("Food Item added!");
+	}
+
+	public static String retrieveAllFI(ArrayList<FoodItem> foodItemList) {
+		String output = "";
+		// write your code here
+		for (FoodItem f : foodItemList) {
+
+			output += String.format("%-20s %10d\n", f.getName(), f.getPrice());
+		}
+		return output;
+	}
+
+	public static void viewAllFI(ArrayList<FoodItem> foodItemList) {
+		C206_CaseStudy.setHeader("View Purchase order");
+		String output = String.format("%-20s %-10s\n", "FOOD ITEM", "PRICE", "STALL NAME");
+		output += retrieveAllFI(foodItemList);
+		System.out.println(output);
+	}
+
+	public static boolean findFI(ArrayList<FoodItem> foodItemList, String getName) {
+		for (FoodItem f : foodItemList) {
+			if (getName == f.getName()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static void deleteFI(ArrayList<FoodItem> foodItemList) {
+		String name = Helper.readString("Enter purchase order id to delete > ");
+		if (findFI(foodItemList, name)) {
+			for (FoodItem f : foodItemList) {
+				if (name == f.getName()) {
+					foodItemList.remove(f);
+				}
+			}
+			System.out.println("\nFood Item Name: " + name + "has been successfully deleted!\\n");
+		}
 	}
 }
