@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
-	
-	private static final int OPTION_QUIT = 16;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -24,7 +22,7 @@ public class C206_CaseStudy {
 		
 		int option = 0;
 
-		while (option != OPTION_QUIT) {
+		while (option != 16) {
 			menu();
 			option = Helper.readInt("Enter an option > ");
 
