@@ -167,6 +167,7 @@ public class C206_CaseStudyTest {
 		//Test that item added is the same as the item in the list
 		assertSame(O4,OrderList.get(OrderList.size()-1));
 	}
+	
 	@Test
 	public void ViewAllTest() {
 		// Test if Item list is not null but empty -boundary
@@ -184,7 +185,26 @@ public class C206_CaseStudyTest {
 		testOutput = String.format("%-10s %-30s %-10d %-10d\n",4, "Mac and Cheese",1 , 3);
 	
 		assertEquals("Test that ViewAllCamcorderlist", testOutput, allOrders);
+	}
+	
+	@Test
+	public void DeleteTest() {
+		// Test if Item list is not null but empty -boundary
+		assertNotNull("Test if there is valid arraylist to retrieve item", OrderList);
 		
+		//test if the list of orders retrieved from the SourceCentre is empty - boundary
+		String allOrders= C206_CaseStudy.retrieveAllOrder(OrderList);
+		String testOutput = "";
+		assertEquals("Check that ViewAllOrderlist", testOutput, allOrders);
+		
+		
+		//test if the expected output string same as the list of Orders retrieved from the SourceCentre	
+		OrderList.remove(O4);
+		OrderList.add(O1);
+		allOrders= C206_CaseStudy.retrieveAllOrder(OrderList);
+		testOutput = String.format("%-10d %-30s %-10d %-10d\n",1, "Chicken Rice",2 , 3);
+	
+		assertEquals("Test that ViewAllCamcorderlist", testOutput, allOrders);
 	}
 
 	

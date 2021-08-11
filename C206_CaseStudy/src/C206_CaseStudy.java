@@ -52,12 +52,17 @@ public class C206_CaseStudy {
 			} 
 			else if(option == 13) {
 				C206_CaseStudy.viewAllOrders(OrderList);
-			} 
-			else if (option == 14) {
+			
+			} else if (option == 14) {
 				// Add Order
 				Foodmenu();
 				OrderItem OI = inputItem();
 				C206_CaseStudy.addItem(OrderList, OI);
+
+			} else if (option == 15) {
+				OrderItem OI = inputItem();
+				C206_CaseStudy.DeleteOrders(OrderList,OI);
+			    C206_CaseStudy.DoDeleteOrders(OrderList, option, option,OI);
 			}
 			else if (option == 16) {
 				System.out.println("Bye!");
@@ -226,17 +231,6 @@ public class C206_CaseStudy {
 		System.out.println("Order added. Your total cost is $"+ (OI.getprice() *OI.getQty()));
 		}
 	}
-	private static Object showAvailability(boolean isAvailable) {
-		// TODO Auto-generated method stub
-		String avail;
-
-		if (isAvailable == true) {
-			avail = "Yes";
-		} else {
-			avail = "No";
-		}
-		return avail;
-	}
 	public static String retrieveAllOrder(ArrayList<OrderItem> OrderList) {
 		String output = "";
 		// write your code here
@@ -255,5 +249,41 @@ public class C206_CaseStudy {
 				"AVAILABILITY");
 		output += retrieveAllOrder(OrderList);	
 		System.out.println(output);
+	}
+	public static Boolean DoDeleteOrders(ArrayList<OrderItem> OrderList,int inputID,int inputQty,OrderItem OI) {
+		boolean isFound = false;
+
+		for (int i = 0; i < OrderList.size(); i++) {
+			
+			int itemID = OrderList.get(i).getItemId();
+			int itemQty = OrderList.get(i).getQty();
+			
+			if (inputID == itemID				
+					&& OrderList.get(i).isAvailable() == true && inputQty == itemQty) {
+				
+				//OrderList.get(i).setAvailable(true);
+				
+				isFound = true;
+				
+			}
+			
+		}
+		return isFound;
+		
+	}
+	public static void DeleteOrders(ArrayList<OrderItem> OrderList,OrderItem OI) {
+		C206_CaseStudy.viewAllOrders(OrderList);
+		int inputID = Helper.readInt("Enter item id > ");
+		int inputQty = Helper.readInt("Enter item qty > ");
+		
+		OI = new OrderItem(OI.getItemId(),OI.getDescription(),OI.getQty(),OI.getprice(),true);
+		
+		Boolean isFound = DoDeleteOrders(OrderList, inputID, inputQty,OI);
+		if (isFound == false) {
+			System.out.println("Invalid Item ID");
+		} else {
+			OrderList.remove(OI);
+			System.out.println("Order item " + inputID + " deleted");
+		}
 	}
 }
