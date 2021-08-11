@@ -21,12 +21,12 @@ public class C206_CaseStudy {
 			menu();
 			option = Helper.readInt("Enter an option > ");
 
-			if (option == 7) {
+			if (option == 4) {
 				addFoodItem(foodItemList);
-			} else if (option == 8) {
+			} else if (option == 5) {
 				retrieveAllFI(foodItemList);
 				viewAllFI(foodItemList);
-			} else if (option == 9) {
+			} else if (option == 6) {
 				deleteFI(foodItemList);
 			} else if (option == 16) {
 				System.out.println("Bye!");
