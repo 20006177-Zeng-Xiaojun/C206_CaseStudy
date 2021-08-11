@@ -46,42 +46,58 @@ public class C206_CaseStudy {
 	public static void menu() {
 		C206_CaseStudy.setHeader("Canteen Automation");
 
-		System.out.println("7. Add purchase orders of ingredients by Stall Staff");
-		System.out.println("8. View purchase order of ingredients by Stall Staff");
-		System.out.println("9. Delete purchase orders of ingredients by Stall Staff");
-		System.out.println("15. Quit");
+		System.out.println("4. Add Food Item Into Menu");
+		System.out.println("5. View Food Item In Menu");
+		System.out.println("6. Delete Food Item In Menu");
+		System.out.println("16. Quit");
 		Helper.line(80, "-");
 
 	}
-	
-	public static void addFoodItem(ArrayList<FoodItem> foodItemList){
-		
+
+	public static void addFoodItem(ArrayList<FoodItem> foodItemList) {
+		String fiName = Helper.readString("Enter food item name > ");
+		int fiPrice = Helper.readInt("Enter food item price > $");
+
+		foodItemList.add(new FoodItem(fiName, fiPrice));
+
+		System.out.println("\nFood Item Name:" + fiName + " has been successfully added!\n");
 	}
-	
+
 	public static String retrieveAllFI(ArrayList<FoodItem> foodItemList) {
 		String output = "";
 		// write your code here
 		for (FoodItem f : foodItemList) {
 
-			output += String.format("%-10s $%-10d\n", f.getName(),f.getPrice());
+			output += String.format("%-10s $%-10d\n", f.getName(), f.getPrice());
 		}
 		return output;
 	}
-	
+
 	public static void viewAllFI(ArrayList<FoodItem> foodItemList) {
-		
+		C206_CaseStudy.setHeader("View Purchase order");
+		String output = String.format("%-10s %-10s\n", "FOOD ITEM", "PRICE", "STALL NAME");
+		output += retrieveAllFI(foodItemList);
+		System.out.println(output);
 	}
-	
-	public static boolean findFI(ArrayList<FoodItem> foodItemList,String getName) {
+
+	public static boolean findFI(ArrayList<FoodItem> foodItemList, String getName) {
 		for (FoodItem f : foodItemList) {
-			if(getName == f.getName()) {
+			if (getName == f.getName()) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	public static void deleteFI(ArrayList<FoodItem> foodItemList){
-		
+
+	public static void deleteFI(ArrayList<FoodItem> foodItemList) {
+		String name = Helper.readString("Enter purchase order id to delete > ");
+		if (findFI(foodItemList, name)) {
+			for (FoodItem f : foodItemList) {
+				if (name == f.getName()) {
+					foodItemList.remove(name);
+				}
+			}
+			System.out.println("\nFood Item Name: " + name + "has been successfully deleted!\\n");
+		}
 	}
 }
