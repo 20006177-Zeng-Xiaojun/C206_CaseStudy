@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 	
-	private static final int OPTION_QUIT = 16;
+	private static final int OPTION_QUIT = 4;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -21,17 +21,17 @@ public class C206_CaseStudy {
 			menu();
 			option = Helper.readInt("Enter an option > ");
 
-			if (option == 7) {
+			if (option == 1) {
 				addPurchaseOrder(poList);
 			}
-			else if (option == 8) {
+			else if (option == 2) {
 				retrieveAllPO(poList);
 				viewAllPO(poList);
 			}
-			else if (option == 9) {
+			else if (option == 3) {
 				deletePO(poList);
 			}
-			else if (option == 16) {
+			else if (option == 4) {
 				System.out.println("Bye!");
 			} else {
 				System.out.println("Invalid option");
@@ -42,10 +42,10 @@ public class C206_CaseStudy {
 	public static void menu() {
 		C206_CaseStudy.setHeader("Canteen Automation");
 
-		System.out.println("7. Add purchase orders of ingredients by Stall Staff");
-		System.out.println("8. View purchase order of ingredients by Stall Staff");
-		System.out.println("9. Delete purchase orders of ingredients by Stall Staff");
-		System.out.println("15. Quit");
+		System.out.println("1. Add purchase orders of ingredients by Stall Staff");
+		System.out.println("2. View purchase order of ingredients by Stall Staff");
+		System.out.println("3. Delete purchase orders of ingredients by Stall Staff");
+		System.out.println("4. Quit");
 		Helper.line(80, "-");
 
 	}

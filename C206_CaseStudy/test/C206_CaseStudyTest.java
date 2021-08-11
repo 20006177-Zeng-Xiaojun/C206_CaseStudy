@@ -23,7 +23,6 @@ public class C206_CaseStudyTest {
 		po3 = new PurchaseOrder (3,4,"Mix Veg Stall");
 		po4 = new PurchaseOrder (4,7,"Chicken Rice Stall");
 		po5 = new PurchaseOrder (5,2,"Western Stall");
-	
 		poList= new ArrayList<PurchaseOrder>();
 	}
 
