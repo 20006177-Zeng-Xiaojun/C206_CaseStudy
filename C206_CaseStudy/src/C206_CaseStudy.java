@@ -24,7 +24,7 @@ public class C206_CaseStudy {
 
 		while (option != 16) {
 			menu();
-			option = Helper.readInt("Enter an option >");
+			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
 				
@@ -59,7 +59,7 @@ public class C206_CaseStudy {
 				OrderItem OI = inputItem();
 				C206_CaseStudy.addItem(OrderList, OI);
 			}
-				else if (option == 16) {
+			else if (option == 16) {
 				System.out.println("Bye!");
 			} 
 			else {
@@ -68,6 +68,7 @@ public class C206_CaseStudy {
 		}
 		
 	}
+	
 	public static void menu() {
 		C206_CaseStudy.setHeader("Canteen Automation");
 		System.out.println("4. Add Food Item Into Menu");
