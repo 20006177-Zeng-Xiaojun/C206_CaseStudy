@@ -24,7 +24,7 @@ public class C206_CaseStudy {
 
 		while (option != 16) {
 			menu();
-			option = Helper.readInt("Enter an option > ");
+			option = Helper.readInt("Enter an option >");
 
 			if (option == 1) {
 				
