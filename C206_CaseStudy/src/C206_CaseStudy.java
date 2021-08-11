@@ -20,7 +20,7 @@ public class C206_CaseStudy {
 		
 		ArrayList<OrderItem> OrderList = new ArrayList<OrderItem>();
 		
-		int option = 0;
+		int option = -1;
 
 		while (option != 16) {
 			menu();
