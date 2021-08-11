@@ -18,18 +18,18 @@ public class C206_CaseStudy {
 		int option = 0;
 
 		while (option != OPTION_QUIT) {
-			menu();
+			C206_CaseStudy.menu();
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
-				addPurchaseOrder(poList);
+				C206_CaseStudy.addPurchaseOrder(poList);
 			}
 			else if (option == 2) {
-				retrieveAllPO(poList);
-				viewAllPO(poList);
+				C206_CaseStudy.retrieveAllPO(poList);
+				C206_CaseStudy.viewAllPO(poList);
 			}
 			else if (option == 3) {
-				deletePO(poList);
+				C206_CaseStudy.deletePO(poList);
 			}
 			else if (option == 4) {
 				System.out.println("Bye!");
