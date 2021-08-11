@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
-
 	private PurchaseOrder po1;
 	private PurchaseOrder po2;
 	private PurchaseOrder po3;
@@ -33,7 +32,7 @@ public class C206_CaseStudyTest {
 		//Test that purchase order list is empty, after add 1 purchase order, the size of the list is 1. (Normal condition)
 		assertEquals(1,poList.size());
 		
-		//Test that purchase order list didn’t not meet the maximum order, so that a new item can be added to (Boundary condition)
+		//Test that purchase order list didnâ€™t not meet the maximum order, so that a new item can be added to (Boundary condition)
 		assertNotEquals(8, poList.size());
 		poList.add(po2);
 		
