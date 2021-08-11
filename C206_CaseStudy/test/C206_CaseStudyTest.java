@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
+
 	private PurchaseOrder po1;
 	private PurchaseOrder po2;
 	private PurchaseOrder po3;
@@ -22,6 +23,7 @@ public class C206_CaseStudyTest {
 		po3 = new PurchaseOrder (3,4,"Mix Veg Stall");
 		po4 = new PurchaseOrder (4,7,"Chicken Rice Stall");
 		po5 = new PurchaseOrder (5,2,"Western Stall");
+	
 		poList= new ArrayList<PurchaseOrder>();
 	}
 
@@ -73,6 +75,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.retrieveAllPO(poList);
 		poList.remove(po2);
 	}
+	
 	
 	@After
 	public void tearDown() throws Exception {
