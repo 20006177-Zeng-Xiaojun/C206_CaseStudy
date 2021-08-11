@@ -41,7 +41,6 @@ public class C206_CaseStudy {
 	}
 	public static void menu() {
 		C206_CaseStudy.setHeader("Canteen Automation");
-
 		System.out.println("1. Add purchase orders of ingredients by Stall Staff");
 		System.out.println("2. View purchase order of ingredients by Stall Staff");
 		System.out.println("3. Delete purchase orders of ingredients by Stall Staff");
