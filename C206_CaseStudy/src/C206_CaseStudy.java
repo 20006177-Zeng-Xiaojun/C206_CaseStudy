@@ -22,7 +22,8 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
-				C206_CaseStudy.addPurchaseOrder(poList);
+				PurchaseOrder cc = inputPO();
+				C206_CaseStudy.addPurchaseOrder(poList, cc);
 			}
 			else if (option == 2) {
 				C206_CaseStudy.retrieveAllPO(poList);
@@ -54,15 +55,18 @@ public class C206_CaseStudy {
 		System.out.println(header);
 		Helper.line(80, "-");
 	}
-	
-	public static void addPurchaseOrder(ArrayList<PurchaseOrder> poList){
+	public static PurchaseOrder inputPO() {
 		int poId = Helper.readInt("Enter purchase order id > ");
 		int amtIngredients = Helper.readInt("Enter total amout of ingredients > ");
 		String zoom = Helper.readString("Enter stall name > ");
 
-		poList.add(new PurchaseOrder (poId, amtIngredients, zoom));
+		PurchaseOrder cc= new PurchaseOrder(poId, amtIngredients, zoom);
+		return cc;
 		
-		System.out.println("\nPurchase Order #"+poId+ " has been successfully added!\n");
+	}
+	public static void addPurchaseOrder(ArrayList<PurchaseOrder> poList, PurchaseOrder cc){
+		poList.add(cc);
+		System.out.println("\nPurchase Order has been successfully added!\n");
 	}
 	
 	public static String retrieveAllPO(ArrayList<PurchaseOrder> poList) {

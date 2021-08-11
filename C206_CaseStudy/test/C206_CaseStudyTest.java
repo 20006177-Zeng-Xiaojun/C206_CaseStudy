@@ -28,13 +28,13 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void testAddPurchaseOrder() {
-		poList.add(po1);
+		C206_CaseStudy.addPurchaseOrder(poList, po1);	
 		//Test that purchase order list is empty, after add 1 purchase order, the size of the list is 1. (Normal condition)
 		assertEquals(1,poList.size());
 		
 		//Test that purchase order list didn't not meet the maximum order, so that a new item can be added to (Boundary condition)
 		assertNotEquals(8, poList.size());
-		poList.add(po2);
+		C206_CaseStudy.addPurchaseOrder(poList, po2);
 		
 		//Test that purchase order that newly added is in the same item as the last purchase order in the list, if not flag out error (Error condition)
 		assertSame(po2, poList.get(poList.size()-1));
@@ -48,12 +48,12 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.viewAllPO(poList);
 		
 		//Test that given list and the retrieved list output is the same (Normal Condition)
-		poList.add(po1);
+		C206_CaseStudy.addPurchaseOrder(poList, po1);	
 		String outputString = String.format("%-10s %-30s %-10s\n", "1", "5","Fruit Stall");
 		assertEquals(outputString, C206_CaseStudy.retrieveAllPO(poList));
 		
 		//Test that given list is empty, after adding 2 items, the size list is 2, if not flag out error. (Error condition)
-		poList.add(po2);
+		C206_CaseStudy.addPurchaseOrder(poList, po2);
 		assertEquals(2, poList.size());
 	}
 	
