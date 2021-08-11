@@ -7,13 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
-
 	private PurchaseOrder po1;
 	private PurchaseOrder po2;
 	private PurchaseOrder po3;
 	private PurchaseOrder po4;
 	private PurchaseOrder po5;
-	
 	private ArrayList<PurchaseOrder> poList;
 	
 	@Before
