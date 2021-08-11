@@ -7,13 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
-
+	
 	private PurchaseOrder po1;
 	private PurchaseOrder po2;
 	private PurchaseOrder po3;
-	private PurchaseOrder po4;
-	private PurchaseOrder po5;
-	
+
 	private ArrayList<PurchaseOrder> poList;
 	
 	@Before
@@ -21,8 +19,6 @@ public class C206_CaseStudyTest {
 		po1 = new PurchaseOrder (1,5,"Fruit Stall");
 		po2 = new PurchaseOrder (2,8,"Drink Stall");
 		po3 = new PurchaseOrder (3,4,"Mix Veg Stall");
-		po4 = new PurchaseOrder (4,7,"Chicken Rice Stall");
-		po5 = new PurchaseOrder (5,2,"Western Stall");
 	
 		poList= new ArrayList<PurchaseOrder>();
 	}
@@ -82,8 +78,6 @@ public class C206_CaseStudyTest {
 		po1 = null;
 		po2 = null;
 		po3 = null;
-		po4 = null;
-		po5 = null;
 		poList = null;
 	}
 }
