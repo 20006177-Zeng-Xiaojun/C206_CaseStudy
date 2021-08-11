@@ -22,7 +22,6 @@ public class C206_CaseStudyTest {
 		po3 = new PurchaseOrder (3,4,"Mix Veg Stall");
 		po4 = new PurchaseOrder (4,7,"Chicken Rice Stall");
 		po5 = new PurchaseOrder (5,2,"Western Stall");
-	
 		poList= new ArrayList<PurchaseOrder>();
 	}
 
@@ -32,7 +31,7 @@ public class C206_CaseStudyTest {
 		//Test that purchase order list is empty, after add 1 purchase order, the size of the list is 1. (Normal condition)
 		assertEquals(1,poList.size());
 		
-		//Test that purchase order list didn’t not meet the maximum order, so that a new item can be added to (Boundary condition)
+		//Test that purchase order list didn't not meet the maximum order, so that a new item can be added to (Boundary condition)
 		assertNotEquals(8, poList.size());
 		poList.add(po2);
 		
@@ -74,7 +73,6 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.retrieveAllPO(poList);
 		poList.remove(po2);
 	}
-	
 	
 	@After
 	public void tearDown() throws Exception {
