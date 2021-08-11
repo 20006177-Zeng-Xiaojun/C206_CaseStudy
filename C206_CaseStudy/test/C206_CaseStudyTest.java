@@ -14,8 +14,13 @@ public class C206_CaseStudyTest {
 	
 	private FoodItem fi1;
 	private FoodItem fi2;
-
 	private ArrayList<FoodItem> foodItemList;
+	
+	private OrderItem O1;
+	private OrderItem O2;
+	private OrderItem O3;
+	private OrderItem O4;
+	ArrayList<OrderItem> OrderList = new ArrayList<OrderItem>(100);
 	
 	@Before
 	public void setUp() throws Exception {
@@ -27,6 +32,12 @@ public class C206_CaseStudyTest {
 		fi1 = new FoodItem("Nasi Ayam", 3);
 		fi2 = new FoodItem("Steak", 15);
 		foodItemList = new ArrayList<FoodItem>();
+		
+		O1 = new OrderItem(1,"Chicken Rice",2,3,true);
+		O2 = new OrderItem(2,"Chicken Sandwhich",6,2,true);
+		O3 = new OrderItem(3,"Fried Rice",2,3,false);
+		O4 = new OrderItem(4,"Mac and Cheese",1,3,true);
+		OrderList = new ArrayList<OrderItem>();
 	}
 
 	@Test
@@ -131,6 +142,51 @@ public class C206_CaseStudyTest {
 		// boundary
 		String allFoodItem = C206_CaseStudy.retrieveAllFI(foodItemList);
 	}
+	
+	@Test
+	public void addOrderTest() {
+		// Item list is not null, so that can add a new item - boundary
+		assertNotNull("Check if there is valid arraylist to add to", OrderList);
+
+		//Order Selected is available
+		C206_CaseStudy.addItem(OrderList, O4);
+		ArrayList<OrderItem> AvailableList = new ArrayList<OrderItem>();
+		AvailableList.add(O1);
+		AvailableList.add(O2);
+		AvailableList.add(O4);
+
+		assertFalse("Test that Order item that is unavailable cannot be added to the Orderlist", AvailableList.contains(O3));
+		
+		assertTrue("Test that Order item that is available can be added to the Orderlist", AvailableList.contains(O4));
+		//Add 2 items. test The size of the list is 2? -normal
+		//The item just added is as same as the second item of the list
+		assertEquals("Check that Camcorder arraylist size is 1", 1, OrderList.size());
+		//Test that OrderList.size() maximum is 100
+		assertNotEquals(100,OrderList);
+		C206_CaseStudy.addItem(OrderList,O2);
+		//Test that item added is the same as the item in the list
+		assertSame(O4,OrderList.get(OrderList.size()-1));
+	}
+	@Test
+	public void ViewAllTest() {
+		// Test if Item list is not null but empty -boundary
+		assertNotNull("Test if there is valid Camcorder arraylist to retrieve item", OrderList);
+		
+		//test if the list of orders retrieved from the SourceCentre is empty - boundary
+		String allOrders= C206_CaseStudy.retrieveAllOrder(OrderList);
+		String testOutput = "";
+		assertEquals("Check that ViewAllOrderlist", testOutput, allOrders);
+		
+		
+		//test if the expected output string same as the list of Orders retrieved from the SourceCentre	
+		OrderList.add(O4);
+		allOrders= C206_CaseStudy.retrieveAllOrder(OrderList);
+		testOutput = String.format("%-10s %-30s %-10d %-10d\n",4, "Mac and Cheese",1 , 3);
+	
+		assertEquals("Test that ViewAllCamcorderlist", testOutput, allOrders);
+		
+	}
+
 	
 	
 	@After

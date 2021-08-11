@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 	
-	private static final int OPTION_QUIT = 8 ;
+	private static final int OPTION_QUIT = 16;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -20,6 +20,8 @@ public class C206_CaseStudy {
 		foodItemList.add(new FoodItem("Nasi Ayam", 3));
 		foodItemList.add(new FoodItem("Steak", 15));
 		
+		ArrayList<OrderItem> OrderList = new ArrayList<OrderItem>();
+		
 		int option = 0;
 
 		while (option != OPTION_QUIT) {
@@ -27,29 +29,42 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
+				
+			}
+			else if (option == 4) {
 				FoodItem fi = inputFoodItem();
 				addFoodItem(foodItemList,fi);
-			} else if (option == 2) {
+			} 
+			else if (option == 5) {
 				retrieveAllFI(foodItemList);
 				viewAllFI(foodItemList);
-			} else if (option == 3) {
+			}
+			else if (option == 6) {
 				deleteFI(foodItemList);
-			} else if (option == 4) {
-				System.out.println("Bye!");
-			} else if (option == 5) {
+			} 
+			else if (option == 7) {
 				PurchaseOrder cc = inputPO();
 				C206_CaseStudy.addPurchaseOrder(poList, cc);
 			}
-			else if (option == 6) {
-				C206_CaseStudy.retrieveAllPO(poList);
+			else if (option == 8) {
 				C206_CaseStudy.viewAllPO(poList);
 			}
-			else if (option == 7) {
+			else if (option == 9) {
 				C206_CaseStudy.deletePO(poList);
+			} 
+			else if(option == 13) {
+				C206_CaseStudy.viewAllOrders(OrderList);
+			} 
+			else if (option == 14) {
+				// Add Order
+				Foodmenu();
+				OrderItem OI = inputItem();
+				C206_CaseStudy.addItem(OrderList, OI);
 			}
-			else if (option == 8) {
+				else if (option == 16) {
 				System.out.println("Bye!");
-			} else {
+			} 
+			else {
 				System.out.println("Invalid option");
 			}
 		}
@@ -57,10 +72,15 @@ public class C206_CaseStudy {
 	}
 	public static void menu() {
 		C206_CaseStudy.setHeader("Canteen Automation");
-		System.out.println("1. Add purchase orders of ingredients by Stall Staff");
-		System.out.println("2. View purchase order of ingredients by Stall Staff");
-		System.out.println("3. Delete purchase orders of ingredients by Stall Staff");
-		System.out.println("4. Quit");
+		System.out.println("4. Add Food Item Into Menu");
+		System.out.println("5. View Food Item In Menu");
+		System.out.println("6. Delete Food Item In Menu");
+		System.out.println("7. Add purchase orders of ingredients by Stall Staff");
+		System.out.println("8. View purchase order of ingredients by Stall Staff");
+		System.out.println("9. Delete purchase orders of ingredients by Stall Staff");
+		System.out.println("13. View All Order");
+		System.out.println("14. Add Order");
+		System.out.println("16. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -174,5 +194,67 @@ public class C206_CaseStudy {
 			}
 			System.out.println("\nFood Item Name: " + name + "has been successfully deleted!\\n");
 		}
+	}
+	
+	public static void Foodmenu() {
+		Helper.line(40, "=");
+		System.out.println("MENU");
+		Helper.line(40, "=");
+		System.out.println("1.Chicken rice : $3");
+		System.out.println("2.Chicken Sandwhich: $2");
+		System.out.println("3.Fried rice: $3 ");
+		System.out.println("4.Sphagetti:$4 ");
+		System.out.println("5.Mac and Cheese: $3");
+		Helper.line(80, "-");
+
+	}
+	public static OrderItem inputItem() {
+		    int id = Helper.readInt("Enter Item number (1 - 5)>");
+			String description = Helper.readString("Enter description > ");
+			int qty = Helper.readInt("Enter qty >");
+			int price = Helper.readInt("Enter price of item >");
+				
+			OrderItem OI = new OrderItem(id,description,qty,price,true);
+			return OI;
+		
+	}
+
+	public static void addItem(ArrayList<OrderItem> OrderList,OrderItem OI) {
+		if(OI.getQty() > 5) {
+			System.out.println("Maximum number of item you can purchase is 5.");
+		}else {
+		OrderList.add(OI);
+		System.out.println("Order added. Your total cost is $"+ (OI.getprice() *OI.getQty()));
+		}
+	}
+	private static Object showAvailability(boolean isAvailable) {
+		// TODO Auto-generated method stub
+		String avail;
+
+		if (isAvailable == true) {
+			avail = "Yes";
+		} else {
+			avail = "No";
+		}
+		return avail;
+	}
+	public static String retrieveAllOrder(ArrayList<OrderItem> OrderList) {
+		String output = "";
+		// write your code here
+		for (int i = 0; i < OrderList.size(); i++) {
+
+			output += String.format("%-10d %-30s %-10d %-10d\n",OrderList.get(i).getItemId(),
+					OrderList.get(i).getDescription(), OrderList.get(i).getQty(),OrderList.get(i).getprice());
+		}
+		return output;
+	}
+	public static void viewAllOrders(ArrayList<OrderItem> OrderList) {
+		Helper.line(40, "=");
+		System.out.println("CAMCORDER LIST");
+		Helper.line(40, "=");
+		String output = String.format("%-10s %-30s %-10s %-10s\n", "ItemID", "DESCRIPTION","QTY","Price",
+				"AVAILABILITY");
+		output += retrieveAllOrder(OrderList);	
+		System.out.println(output);
 	}
 }
