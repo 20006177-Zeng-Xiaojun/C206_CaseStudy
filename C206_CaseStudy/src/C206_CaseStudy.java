@@ -20,6 +20,13 @@ public class C206_CaseStudy {
 		
 		ArrayList<OrderItem> OrderList = new ArrayList<OrderItem>();
 		
+		ArrayList<Stall> stallList = new ArrayList<Stall>();
+		stallList.add(new Stall("Karl Malone", "Japanese", 98696768, "MailMan Paradise"));
+		stallList.add(new Stall("Carmelo Anthony", "Western", 91473411, "StayMe70"));
+		stallList.add(new Stall("Lebron James", "Mexican", 88122326, "King's Tacos"));
+		stallList.add(new Stall("John Baltimore", "Drinks", 93403375, "Fluid Stop"));
+		stallList.add(new Stall("Dwyane Wade", "Chinese", 96803815, "Flash Mee"));
+		
 		int option = -1;
 
 		while (option != 16) {
@@ -27,7 +34,14 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
-				
+				Stall s = inputStall();
+				addNewStall(stallList, s);
+
+			} else if (option == 2) {
+				viewStallDetails(stallList);
+
+			} else if (option == 3) {
+				deleteStall(stallList);
 			}
 			else if (option == 4) {
 				FoodItem fi = inputFoodItem();
@@ -76,6 +90,9 @@ public class C206_CaseStudy {
 	
 	public static void menu() {
 		C206_CaseStudy.setHeader("Canteen Automation");
+		System.out.println("1. Add New Stall (Canteen Administrator)");
+		System.out.println("2. View Stall Details (Canteen Administrator)");
+		System.out.println("3. Delete Stall (Canteen Administrator)");
 		System.out.println("4. Add Food Item Into Menu");
 		System.out.println("5. View Food Item In Menu");
 		System.out.println("6. Delete Food Item In Menu");
@@ -284,6 +301,56 @@ public class C206_CaseStudy {
 		} else {
 			OrderList.remove(OI);
 			System.out.println("Order item " + inputID + " deleted");
+		}
+	}
+	
+	public static void addNewStall(ArrayList<Stall> stallList, Stall s ) {
+		if (stallList.size() < 10) {
+			stallList.add(s);
+			System.out.println("\n Stall with vendor of contact number " + s.getNo() + " is added");
+		} else {
+			System.out.println("Stalls Maximum Occupancy reached");
+		}
+
+	}
+	
+	public static Stall inputStall() {
+		String vendorName = Helper.readString("Enter Vendor's Name: ");
+		String cuisine = Helper.readString("Enter Cuisine Type: ");
+		int contactNum = Helper.readInt("Enter Contact Number: ");
+		String stallName = Helper.readString("Enter Desired Stall Name: ");
+
+		Stall s = new Stall(vendorName, cuisine, contactNum, stallName);
+		return s;
+	}
+
+	public static String retreiveStallDetails(ArrayList<Stall> stallList) {
+		String output = "";
+		for (int i = 0; i < stallList.size(); i++) {
+			output += String.format("%-20s %-20s %-20d %-20s\n", stallList.get(i).getName(),
+					stallList.get(i).getCuisine(), stallList.get(i).getNo(), stallList.get(i).getStallName());
+		}
+
+		return output;
+	}
+	
+	public static void viewStallDetails(ArrayList<Stall> stallList) {
+		String output = String.format("%-20s %-20s %-20s %-20s\n", "VENDOR NAME", "CUISINE", "CONTACT", "STALL NAME");
+		 output += retreiveStallDetails(stallList);	
+		System.out.println(output);
+	}
+
+	public static void deleteStall(ArrayList<Stall> stallList) {
+		String delete = Helper.readString("Enter contact number of vendor to delete stall: ");
+		String confirm = Helper.readString("Are you sure: ");
+		if (confirm == "yes") {
+			for (int i = 0; i < stallList.size(); i++) {
+				if (Integer.parseInt(delete) == stallList.get(i).getNo()) {
+					stallList.remove(i);
+					System.out
+							.println("Stall with vendor of contact number " + stallList.get(i).getNo() + " is deleted");
+				}
+			}
 		}
 	}
 }
