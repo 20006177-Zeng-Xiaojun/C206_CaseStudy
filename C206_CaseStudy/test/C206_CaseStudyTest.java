@@ -22,6 +22,11 @@ public class C206_CaseStudyTest {
 	private OrderItem O4;
 	ArrayList<OrderItem> OrderList = new ArrayList<OrderItem>(100);
 	
+	private Stall s1;
+	private Stall s2;
+	private Stall s3;
+	private ArrayList<Stall> stallList;
+	
 	@Before
 	public void setUp() throws Exception {
 		po1 = new PurchaseOrder (1,5,"Fruit Stall");
@@ -38,6 +43,11 @@ public class C206_CaseStudyTest {
 		O3 = new OrderItem(3,"Fried Rice",2,3,false);
 		O4 = new OrderItem(4,"Mac and Cheese",1,3,true);
 		OrderList = new ArrayList<OrderItem>();
+		
+		s1 = new Stall("Kabane Otshisuki", "Japanese", 96096768, "Japan's Shore");
+		s2 = new Stall("Simone Wilkes", "Western", 98696734, "Western Side");
+		s3 = new Stall("Jerry Wang", "Chinese", 98696712, "Chinese Delicacy");
+		stallList= new ArrayList<Stall>();
 	}
 
 	@Test
@@ -205,6 +215,42 @@ public class C206_CaseStudyTest {
 		testOutput = String.format("%-10d %-30s %-10d %-10d\n",1, "Chicken Rice",2 , 3);
 	
 		assertEquals("Test that ViewAllCamcorderlist", testOutput, allOrders);
+	}
+	
+	@Test
+	public void testAddNewStall() {
+		// Item list is not null, so that can add a new item
+		assertNotNull("Test if there is a valid stallList to add", stallList);
+		
+		//Test that stall list didn't not meet the maximum order, so that a new item can be added to (Boundary condition)
+		assertNotEquals(10, stallList.size());
+		
+		//Test that stall that newly added is in the same item as the last stall in the list, if not flag out error (Error condition)
+		C206_CaseStudy.addNewStall(stallList, s1);	
+		assertSame(s1, stallList.get(stallList.size()-1));
+		
+	}
+	
+	@Test
+	public void testViewStall() {
+		//Test that purchase order list is not null, so that the string output will display the list of items (Boundary condition)
+		assertNotNull(stallList);
+		C206_CaseStudy.viewStallDetails(stallList);
+		
+		//Test that given list and the retrieved list output is the same (Normal Condition)
+		C206_CaseStudy.addNewStall(stallList, s1);	
+		String outputString = String.format("%-20s %-20s %-20d %-20s\n", "Kabane Otshisuki", "Japanese", 96096768, "Japan's Shore");
+		assertEquals(outputString, C206_CaseStudy.retreiveStallDetails(stallList));
+		
+		//Test that given list is empty, after adding 2 items, the size list is 2, if not flag out error. (Error condition)
+		C206_CaseStudy.addNewStall(stallList, s2);
+		assertEquals(2, stallList.size());
+	}
+	
+	@Test
+	public void testDeleteStall() {
+		// Test if Stall list is not null but empty -boundary
+		assertNotNull("Test if there is valid stall arraylist to retrieve item", stallList);
 	}
 
 	
