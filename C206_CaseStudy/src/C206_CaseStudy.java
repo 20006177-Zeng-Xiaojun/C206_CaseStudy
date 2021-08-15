@@ -27,6 +27,11 @@ public class C206_CaseStudy {
 		stallList.add(new Stall("John Baltimore", "Drinks", 93403375, "Fluid Stop"));
 		stallList.add(new Stall("Dwyane Wade", "Chinese", 96803815, "Flash Mee"));
 		
+		ArrayList<Promotion> promoList = new ArrayList<Promotion>();
+		promoList.add(new Promotion(1, "Fruit Stall", "Watermelon"));
+		promoList.add(new Promotion(2, "Drink Stall", "Green Tea"));
+		promoList.add(new Promotion(3, "Western Stall", "Fish & Chips"));
+		
 		int option = -1;
 
 		while (option != 16) {
@@ -99,6 +104,9 @@ public class C206_CaseStudy {
 		System.out.println("7. Add purchase orders of ingredients by Stall Staff");
 		System.out.println("8. View purchase order of ingredients by Stall Staff");
 		System.out.println("9. Delete purchase orders of ingredients by Stall Staff");
+		System.out.println("10. Add promotion offers.");
+		System.out.println("11. View promotion offers.");
+		System.out.println("12. Delete promotion offers.");
 		System.out.println("13. View All Order");
 		System.out.println("14. Add Order");
 		System.out.println("16. Quit");
@@ -353,4 +361,58 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+	public static Promotion inputNewPromo() {
+		int promoId = Helper.readInt("Enter promotion id > ");
+		String stallName = Helper.readString("Enter Stall Name > ");
+		String item = Helper.readString("Enter promotion item > ");
+
+		Promotion pp= new Promotion(promoId, stallName, item);
+		return pp;
+		
+	}
+	public static void addPromotion(ArrayList<Promotion> promoList, Promotion pp){
+		promoList.add(pp);
+		System.out.println("\nPurchase Order has been successfully added!\n");
+	}
+	
+	public static String retrieveAllPromotion(ArrayList<Promotion> promoList) {
+		String output = "";
+		// write your code here
+		for (int i = 0; i < promoList.size(); i++) {
+
+			output += String.format("%-10s %-30s %-10s\n", promoList.get(i).getPromoID(),
+					promoList.get(i).getName(), promoList.get(i).getPromoItem());
+		}
+		return output;
+	}
+	
+	public static void viewAllPromotion(ArrayList<Promotion> promoList) {
+		C206_CaseStudy.setHeader("View Purchase order");
+		String output = String.format("%-10s %-30s %-10s\n", "PROMOTION ID", "STALL NAME",
+				"PROMOTION ITEM");
+		 output += retrieveAllPromotion(promoList);	
+		System.out.println(output);
+	}
+	
+	public static boolean findPromo(ArrayList<Promotion> promoList,int id) {
+		for (int j = 0; j < promoList.size(); j++) {
+			if(id == promoList.get(j).getPromoID()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static void deletePromo(ArrayList<Promotion> promoList){
+		int id = Helper.readInt("Enter purchase order id to delete > ");
+		if(findPromo(promoList, id)) {
+			for (int j = 0; j < promoList.size(); j++) {
+				if(id == promoList.get(j).getPromoID()) {
+					promoList.remove(j);
+				}
+			}System.out.println("\nPromotion Item #"+id+ " has been successfully deleted!\n");
+		}
+	}
 }
+
+
